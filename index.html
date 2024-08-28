@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="backgroundMusic" src="./assets/_- Instrumental 1 (320).mp3" loop preload="auto"></audio>
+    <audio id="eatSound" src="./assets/apple-bite-chew-eat-32412-[AudioTrimmer.com].mp3" preload="auto"></audio>
+    <audio id="gameOverSound" src="./assets/Game-Over-Sound-Effect-4.mp3" preload="auto"></audio> <!-- افزودن صدای باخت -->
+    <div id="gameContainer">
+        <h1>Snake Game</h1>
+        <p id="score">Score: 0</p>
+        <p id="highScore">High Score: 0</p>
+        <canvas id="gameCanvas"></canvas>
+        <div id="controls">
+            <button id="upButton" onclick="setDirection('UP')">▲</button>
+            <div class="middle-buttons">
+                <button id="leftButton" onclick="setDirection('LEFT')">◄</button>
+                <button id="downButton" onclick="setDirection('DOWN')">▼</button>
+                <button id="rightButton" onclick="setDirection('RIGHT')">►</button>
+            </div>
+        </div>
+        <button id="restartBtn" onclick="restartGame()">Restart</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
