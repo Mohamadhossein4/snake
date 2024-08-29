@@ -238,3 +238,66 @@ function restartGame() {
 
 draw();
 updateHighScore(); // Display high score on page load
+
+
+// setting
+
+
+// متغیرها برای کنترل وضعیت صداها
+let backgroundMusicEnabled = true;
+let soundEffectsEnabled = true;
+
+document.getElementById('settingsIcon').addEventListener('click', function() {
+    const settingsPanel = document.getElementById('settingsPanel');
+    settingsPanel.style.display = settingsPanel.style.display === 'none' || settingsPanel.style.display === '' ? 'block' : 'none';
+});
+
+function toggleBackgroundMusic() {
+    if (backgroundMusicEnabled) {
+        backgroundMusic.pause();
+    } else {
+        backgroundMusic.play();
+    }
+    backgroundMusicEnabled = !backgroundMusicEnabled;
+}
+
+function toggleSoundEffects() {
+    soundEffectsEnabled = !soundEffectsEnabled;
+
+    // قطع و وصل کردن صدای خوردن سیب و گیم اور
+    if (!soundEffectsEnabled) {
+        eatSound.volume = 0; // صدا را قطع می‌کند
+        gameOverSound.volume = 0; // صدا را قطع می‌کند
+    } else {
+        eatSound.volume = 1; // صدا را فعال می‌کند
+        gameOverSound.volume = 1; // صدا را فعال می‌کند
+    }
+}
+
+function playEatSound() {
+    if (soundEffectsEnabled) {
+        eatSound.currentTime = 0;
+        eatSound.play().catch(error => {
+            console.error("Failed to play eat sound:", error);
+        });
+    }
+}
+
+function playGameOverSound() {
+    if (soundEffectsEnabled) {
+        gameOverSound.currentTime = 0;
+        gameOverSound.play().catch(error => {
+            console.error("Failed to play game over sound:", error);
+        });
+    }
+}
+
+// افزودن تابع خروج از بازی
+function exitGame() {
+    alert("Thanks for playing! Exiting the game...");
+    window.location.reload();
+}
+ 
+
+// pause & resume
+

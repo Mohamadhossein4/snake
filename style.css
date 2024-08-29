@@ -21,13 +21,21 @@ body {
 
 h1 {
     color: white;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
-#score {
+#scoreContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* فاصله بین Score و High Score */
     margin-bottom: 20px;
+}
+
+#score, #highScore {
     color: white;
     font-size: 16px;
+    margin: 0;
 }
 
 canvas {
@@ -89,9 +97,56 @@ button:hover {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-family: 'Press Start 2P', cursive;
-    /* حذف سایه برای دکمه ری‌استارت */
 }
 
 #restartBtn:hover {
     background-color: #E53935;
+}
+
+#settingsContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+}
+
+#settingsIcon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#settingsPanel {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#settingsPanel button {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    width: 180px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#settingsPanel button:hover {
+    background-color: #45a049;
+}
+.icon {
+    color: white;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
