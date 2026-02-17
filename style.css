@@ -28,7 +28,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px; /* فاصله بین Score و High Score */
+    gap: 40px; 
     margin-bottom: 20px;
 }
 
@@ -60,11 +60,11 @@ button {
     background-color: #333;
     color: white;
     border: none;
-    border-radius: 10px; /* گرد کردن گوشه‌ها */
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
     outline: none;
-    box-shadow: 9px 9px 14px -4px rgba(0,0,0,0.67); /* سایه تیره‌تر */
+    box-shadow: 9px 9px 14px -4px rgba(0,0,0,0.67);
 }
 
 button:active {
@@ -73,7 +73,7 @@ button:active {
 
 button:hover {
     background-color: #555;
-    box-shadow: 5px 6px 6px -4px rgba(0, 0, 0, 0.67); /* سایه تیره‌تر در حالت هاور */
+    box-shadow: 5px 6px 6px -4px rgba(0, 0, 0, 0.67);
 }
 
 .middle-buttons {
@@ -93,7 +93,7 @@ button:hover {
     background-color: #FF4136;
     color: white;
     border: none;
-    border-radius: 10px; /* گرد کردن گوشه‌ها */
+    border-radius: 10px; 
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-family: 'Press Start 2P', cursive;
