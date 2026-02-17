@@ -32,27 +32,27 @@ let food = {
 let score = 0;
 let gameOver = false;
 
-let goldenApple = null; // موقعیت سیب طلایی
-let goldenAppleActive = false; // فعال بودن سیب طلایی
-let goldenAppleTimer = 0; // تایمر برای سیب طلایی
-let normalAppleCount = 0; // تعداد سیب‌های معمولی خورده شده
-const goldenAppleDuration = 6000; // مدت زمان 6 ثانیه برای سیب طلایی
-const goldenAppleBlinkTime = 3000; // زمان شروع چشمک زدن
+let goldenApple = null;  
+let goldenAppleActive = false;    
+let goldenAppleTimer = 0; 
+let normalAppleCount = 0;
+const goldenAppleDuration = 6000;
+const goldenAppleBlinkTime = 3000;
 
-// Load snake head image
+
 const snakeHeadImg = new Image();
 snakeHeadImg.src = './assets/headSnake.png';
-let snakeHeadRotation = 0; // Variable to store the rotation angle
+let snakeHeadRotation = 0;
 
 function drawSnake() {
-    // Draw snake head with rotation
-    ctx.save(); // Save the current state
-    ctx.translate(snake[0].x + boxSize / 2, snake[0].y + boxSize / 2); // Move to the head center
-    ctx.rotate(snakeHeadRotation * Math.PI / 180); // Rotate the canvas to the correct angle
-    ctx.drawImage(snakeHeadImg, -boxSize / 2, -boxSize / 2, boxSize, boxSize); // Draw the head
-    ctx.restore(); // Restore the state to prevent affecting other drawings
+   
+    ctx.save(); 
+    ctx.translate(snake[0].x + boxSize / 2, snake[0].y + boxSize / 2); 
+    ctx.rotate(snakeHeadRotation * Math.PI / 180); 
+    ctx.drawImage(snakeHeadImg, -boxSize / 2, -boxSize / 2, boxSize, boxSize); 
+    ctx.restore(); 
 
-    // Draw the rest of the snake body
+ 
     for (let i = 1; i < snake.length; i++) {
         ctx.fillStyle = "lime";
         ctx.fillRect(snake[i].x, snake[i].y, boxSize, boxSize);
@@ -63,15 +63,15 @@ function drawSnake() {
 
 function drawFood() {
     if (goldenAppleActive) {
-        // Draw golden apple
+        
         if (goldenAppleTimer >= goldenAppleBlinkTime && Math.floor(goldenAppleTimer / 200) % 2 === 0) {
-            ctx.fillStyle = "transparent"; // چشمک زن
+            ctx.fillStyle = "transparent";
         } else {
             ctx.fillStyle = "gold";
         }
         ctx.fillRect(goldenApple.x, goldenApple.y, boxSize, boxSize);
     } else {
-        // Draw normal apple
+        
         ctx.fillStyle = "red";
         ctx.fillRect(food.x, food.y, boxSize, boxSize);
     }
@@ -85,32 +85,32 @@ function moveSnake() {
     switch (direction) {
         case "LEFT":
             head.x -= boxSize;
-            snakeHeadRotation = 180; // Rotate head left
+            snakeHeadRotation = 180; 
             break;
         case "UP":
             head.y -= boxSize;
-            snakeHeadRotation = 270; // Rotate head up
+            snakeHeadRotation = 270; 
             break;
         case "RIGHT":
             head.x += boxSize;
-            snakeHeadRotation = 0; // Rotate head right
+            snakeHeadRotation = 0; 
             break;
         case "DOWN":
             head.y += boxSize;
-            snakeHeadRotation = 90; // Rotate head down
+            snakeHeadRotation = 90;
             break;
     }
 
     snake.unshift(head);
 
-    // Check if snake has eaten the food
+ 
     if (goldenAppleActive && head.x === goldenApple.x && head.y === goldenApple.y) {
-        // If the snake eats the golden apple
+        
         score += 3;
         document.getElementById("score").innerText = "Score: " + score;
         goldenAppleActive = false;
         normalAppleCount = 0;
-        // Add 3 blocks to the snake
+       
         for (let i = 0; i < 3; i++) {
             snake.push({ x: snake[snake.length - 1].x, y: snake[snake.length - 1].y });
         }
@@ -119,10 +119,10 @@ function moveSnake() {
         document.getElementById("score").innerText = "Score: " + score;
         food.x = Math.floor(Math.random() * 20) * boxSize;
         food.y = Math.floor(Math.random() * 20) * boxSize;
-        eatSound.play(); // Play eating sound
+        eatSound.play(); 
         normalAppleCount++;
 
-        // Check if it's time to spawn a golden apple
+        
         if (normalAppleCount === 4) {
             spawnGoldenApple();
         }
@@ -137,18 +137,18 @@ function spawnGoldenApple() {
         y: Math.floor(Math.random() * 20) * boxSize
     };
     goldenAppleActive = true;
-    goldenAppleTimer = 0; // Reset timer
+    goldenAppleTimer = 0; 
 }
 
 function checkCollision() {
     const head = snake[0];
 
-    // Check wall collision
+    
     if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
         gameOver = true;
     }
 
-    // Check self collision
+
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             gameOver = true;
@@ -156,10 +156,10 @@ function checkCollision() {
     }
 
     if (gameOver) {
-        gameOverSound.play(); // Play game over sound
+        gameOverSound.play(); 
         document.getElementById("restartBtn").style.visibility = "visible";
 
-        // Update high score if needed
+        
         updateHighScore();
     }
 }
@@ -170,7 +170,7 @@ function drawTimerBar() {
         const timerWidth = (remainingTime / goldenAppleDuration) * canvas.width;
 
         ctx.fillStyle = "yellow";
-        ctx.fillRect(0, 0, timerWidth, 5); // Draw the timer bar at the top
+        ctx.fillRect(0, 0, timerWidth, 5); 
     }
 }
 
@@ -182,16 +182,16 @@ function draw() {
     checkCollision();
     drawTimerBar();
 
-    // Handle golden apple timer
+   
     if (goldenAppleActive) {
         goldenAppleTimer += 150;
         if (goldenAppleTimer >= goldenAppleDuration) {
-            goldenAppleActive = false; // Hide golden apple after the duration
+            goldenAppleActive = false; 
         }
     }
 
     if (!gameOver) {
-        setTimeout(draw, 150); // کاهش سرعت مار
+        setTimeout(draw, 150); 
     }
 }
 
@@ -232,18 +232,18 @@ function restartGame() {
     document.getElementById("score").innerText = "Score: " + score;
     document.getElementById("restartBtn").style.visibility = "hidden";
     gameOver = false;
-    draw(); // Start the game
-    updateHighScore(); // Update high score display
+    draw();
+    updateHighScore();
 }
 
 draw();
-updateHighScore(); // Display high score on page load
+updateHighScore(); 
 
 
-// setting
 
 
-// متغیرها برای کنترل وضعیت صداها
+
+
 let backgroundMusicEnabled = true;
 let soundEffectsEnabled = true;
 
@@ -264,13 +264,12 @@ function toggleBackgroundMusic() {
 function toggleSoundEffects() {
     soundEffectsEnabled = !soundEffectsEnabled;
 
-    // قطع و وصل کردن صدای خوردن سیب و گیم اور
     if (!soundEffectsEnabled) {
-        eatSound.volume = 0; // صدا را قطع می‌کند
-        gameOverSound.volume = 0; // صدا را قطع می‌کند
+        eatSound.volume = 0; 
+        gameOverSound.volume = 0; 
     } else {
-        eatSound.volume = 1; // صدا را فعال می‌کند
-        gameOverSound.volume = 1; // صدا را فعال می‌کند
+        eatSound.volume = 1;
+        gameOverSound.volume = 1; 
     }
 }
 
@@ -292,12 +291,9 @@ function playGameOverSound() {
     }
 }
 
-// افزودن تابع خروج از بازی
 function exitGame() {
     alert("Thanks for playing! Exiting the game...");
     window.location.reload();
 }
  
-
-// pause & resume
 
